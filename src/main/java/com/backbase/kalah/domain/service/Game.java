@@ -18,6 +18,7 @@ public class Game{
     private Board board;
     private Map<Player, Row> mapPlayerRow;
     private Player nextPlayer;
+    private int status;
 
     public Game(Board board, String topRowPlayerName, String bottomRowPlayerName) {
         initializeObjects(board, topRowPlayerName, bottomRowPlayerName);
@@ -31,6 +32,7 @@ public class Game{
         this.board = board;
         this.mapPlayerRow = new HashMap<Player, Row>(2);
         nextPlayer = bottomRowPlayer;
+        status = Status.IN_PROGRESS;
     }
 
     private void mapPlayerWithRow(){
@@ -85,8 +87,11 @@ public class Game{
             stonesInPit--;
             row.incrementAStoneInTheStore();
 
-            if(stonesInPit == 0)
+            if(stonesInPit == 0) {
+                if(row.isEmpty())
+                    status = Status.FINISHED;
                 return;
+            }
         }
 
         Map.Entry<Player, Row> opponentPlayer = getOppositePlayerRowEntry(player);
@@ -96,6 +101,11 @@ public class Game{
         for(int currentPitIndex = 0; stonesInPit > 0 &&  currentPitIndex < oponnentRow.getNumberOfPits(); currentPitIndex++){
             stonesInPit--;
             oponnentRow.incrementAStoneInThePit(currentPitIndex);
+        }
+
+        if(oponnentRow.isEmpty() || row.isEmpty()){
+            status = Status.FINISHED;
+            return;
         }
 
         this.nextPlayer = opponentPlayer.getKey();
@@ -114,5 +124,14 @@ public class Game{
 
     public int getTopPlayerStore() {
         return mapPlayerRow.get(topRowPlayer).getStore();
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
+
+    public static class Status{
+        public static int IN_PROGRESS = 1;
+        public static int FINISHED = 2;
     }
 }

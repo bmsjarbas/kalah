@@ -120,17 +120,47 @@ public class GameTests {
     }
 
     @Test
-    public void  giveAMoveWhenTheLastStoneYouDropIsInAnEmptyPitOnCurrentPlayerSideThenCaptureThatAndAllStonesInThePitDirectlyOpposite() throws InvalidMoveException {
-        //0 8 7 7 7 7
-        //1 0 8 8 8 8
+    public void  givenAMoveWhenTheLastStoneYouDropIsInAnEmptyPitOnCurrentPlayerSideThenCaptureThatAndAllStonesInThePitDirectlyOpposite() throws InvalidMoveException {
+
         game.move(game.getNextPlayer(), 0);
         game.move(game.getNextPlayer(), 1);
         game.move(game.getNextPlayer(), 0);
         game.move(game.getNextPlayer(), 0);
-
-        //+9;
         Assert.assertEquals(11,  game.getBottomPlayerStore());
 
     }
+
+    @Test
+    public void givenAGameWhenSomeRowHasAllPitsEmptyThenTheGameEnds() throws InvalidMoveException {
+        bottomRow = getRowWithOnlyOnePitFilled();
+        topRow = new Row(6, 6);
+        board = new Board(bottomRow, topRow);
+        game = new Game(board, "topRow Player", "bottomRow Player");
+        game.move(game.getNextPlayer(), 5);
+        Assert.assertEquals(Game.Status.FINISHED,  game.getStatus());
+
+    }
+
+    @Test
+    public void givenANewGameTheStatusShouldBeNotStarted(){
+        Assert.assertEquals(Game.Status.IN_PROGRESS, game.getStatus());
+    }
+
+    @Test
+    public void givenANewGameAndANewMoveTheStatusShouldBeInProgress() throws InvalidMoveException {
+        game.move(game.getNextPlayer(), 0);
+        Assert.assertEquals(Game.Status.IN_PROGRESS, game.getStatus());
+    }
+
+    private Row getRowWithOnlyOnePitFilled(){
+        Row row = new Row(6, 6);
+        for(int index = 0; index < row.getNumberOfPits() -1; index ++){
+            row.setStonesInThePit(index, 0);
+        }
+        row.setStonesInThePit(row.getNumberOfPits()-1, 1);
+        return row;
+    }
+
+
 
 }

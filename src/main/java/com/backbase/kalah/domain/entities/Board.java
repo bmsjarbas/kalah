@@ -9,7 +9,7 @@ public class Board {
    private Row topRow;
    private Row bottomRow;
 
-    public Board(Row topRow, Row bottomRow){
+    public Board(Row bottomRow, Row topRow){
         this.topRow = topRow;
         this.bottomRow = bottomRow;
     }

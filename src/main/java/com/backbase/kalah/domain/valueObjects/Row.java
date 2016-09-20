@@ -53,4 +53,11 @@ public class Row {
     public void addStonesInTheStore(int quantity) {
         this.store += quantity;
     }
+
+    public boolean isEmpty() {
+        for(int index = 0; index < pits.length; index++)
+            if(pits[index] != 0)
+                return false;
+        return true;
+    }
 }
