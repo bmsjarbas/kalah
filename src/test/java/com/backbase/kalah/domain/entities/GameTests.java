@@ -1,6 +1,7 @@
 package com.backbase.kalah.domain.entities;
 
 import com.backbase.kalah.domain.exceptions.InvalidMoveException;
+import com.backbase.kalah.domain.service.Game;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,10 +13,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class GameTests {
     Game game;
+    Board board;
 
     @Before
     public void setUp() {
-        game = new Game("Player topRow", "Player bottomRow");
+        board = new Board();
+        game = new Game(board, "Player topRow", "Player bottomRow");
     }
 
     @Test
@@ -105,34 +108,12 @@ public class GameTests {
         assertEquals(player, nextPlayer);
     }
 
-
-    @Test
-    public void giveAMoveWhenTheLastStoneIsDroppedInAEmptyPitOnCurrentPlayerSideThenThisStoneAndAllFromOppositePitWillBeTakenAndDepositedOnCurrentPlayerStore() throws InvalidMoveException {
-
-        game.move(game.getNextPlayer(), 0);
-        game.move(game.getNextPlayer(), 1);
-
-        int[] expectedTopRow = new int[]{7,7,6,6,6,6};
-        int[] expectedBottomRow = new int[]{0,0,8,8,8,8};
-        expectedTopRow = new int[]{7,7,6,6,6,6};
-
-        game.move(game.getNextPlayer(), 0);
-        expectedBottomRow = new int[]{1,1,8,8,8,8};
-        expectedTopRow = new int[]{0,8,7,7,7,7};
-
-        //Assert.assertEquals(13, game.getBottomPlayerStore());
-
-
-    }
-
-
     @Test(expected = InvalidMoveException.class)
     public void givenAMoveFromAEmptyPitShouldThrowAnException() throws InvalidMoveException {
         game.move(game.getNextPlayer(), 0);
         game.move(game.getNextPlayer(), 0);
-
     }
 
-   
+
 
 }
