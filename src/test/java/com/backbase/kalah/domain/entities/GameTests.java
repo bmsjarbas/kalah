@@ -71,16 +71,34 @@ public class GameTests {
     }
 
     @Test
-    public void testAfterTwoMovesFrom3rdPitTopRowShouldBe770677(){
+    public void testAfterTwoMovesFrom3rdPitTopRowShouldBe770777(){
         Player player = game.getNextPlayer();
         int pitIndex = 2;
         game.move(player, pitIndex);
         Player nextPlayer = game.getNextPlayer();
         game.move(nextPlayer, pitIndex);
         int[] expectedTopRow = new int[]{7,7,0,7,7,7};
-        int[] expectedBottomRow = new int[]{7,7,0,7,7,7};
-        //Assert.assertEquals(1, game.getBottomPlayerStore());
         Assert.assertArrayEquals(expectedTopRow, game.getCurrentTopRowPits());
+    }
+
+    @Test
+    public void testAfterTwoMovesFrom3rdPitBottomRowShouldBe770777(){
+        Player player = game.getNextPlayer();
+        int pitIndex = 2;
+        game.move(player, pitIndex);
+        Player nextPlayer = game.getNextPlayer();
+        game.move(nextPlayer, pitIndex);
+        int[] expectedBottomRow = new int[]{7,7,0,7,7,7};
+        Assert.assertArrayEquals(expectedBottomRow, game.getCurrentBottomRowPits());
+    }
+
+    @Test
+    public void testAfterAMoveAndTheLastStoneIsDroppedInTheCurrentPlayerStoreThenHeGetsAFreeTurn(){
+        Player player = game.getNextPlayer();
+        int pitIndex = 0;
+        game.move(player, pitIndex);
+        Player nextPlayer = game.getNextPlayer();
+        Assert.assertEquals(player, nextPlayer);
     }
 
 }

@@ -67,9 +67,13 @@ public class Game {
             row.incrementAStoneInThePit(currentPitIndex);
         }
 
+
         if(stonesInPit > 0){
             stonesInPit--;
             row.incrementAStoneInTheStore();
+
+            if(stonesInPit == 0)
+                return;
         }
 
          Map.Entry<Player, Row> opponentPlayer = mapPlayerRow.entrySet()
