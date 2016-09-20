@@ -25,5 +25,10 @@ public class GameTests {
     public void testHasABoard(){
         Assert.assertNotNull(game.getBoard());
     }
+    @Test
+    public void testStartsWithTopRowPlayer(){
+        Player nextPlayer = game.getNextPlayer();
+        Assert.assertEquals("Player topRow", nextPlayer.getName());
+    }
 
 }
