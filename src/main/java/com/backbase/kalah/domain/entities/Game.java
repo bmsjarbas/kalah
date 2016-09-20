@@ -83,6 +83,7 @@ public class Game {
             stonesInPit--;
             oponnentRow.incrementAStoneInThePit(currentPitIndex);
         }
+        this.nextPlayer = opponentPlayer.getKey();
     }
 
     public int getBottomPlayerStore() {

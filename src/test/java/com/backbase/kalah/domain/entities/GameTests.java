@@ -51,4 +51,13 @@ public class GameTests {
 
     }
 
+    @Test
+    public void testAfterATurnTheNextPlayerShouldBeDiferentFromPreviousOne(){
+        Player firstPlayer = game.getNextPlayer();
+        int pitIndex = 2;
+        game.move(firstPlayer, pitIndex);
+        Player currentPlayer = game.getNextPlayer();
+        Assert.assertNotEquals(firstPlayer, currentPlayer);
+    }
+
 }
