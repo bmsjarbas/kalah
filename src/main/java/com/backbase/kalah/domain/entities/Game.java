@@ -67,7 +67,6 @@ public class Game {
             row.incrementAStoneInThePit(currentPitIndex);
         }
 
-
         if(stonesInPit > 0){
             stonesInPit--;
             row.incrementAStoneInTheStore();
@@ -77,7 +76,7 @@ public class Game {
         }
 
          Map.Entry<Player, Row> opponentPlayer = mapPlayerRow.entrySet()
-                 .parallelStream()
+                 .stream()
                  .filter(e -> e.getKey() != player)
                  .findFirst().get();
 

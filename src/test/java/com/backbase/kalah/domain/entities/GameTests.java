@@ -26,17 +26,26 @@ public class GameTests {
         Assert.assertNotNull(game.getBoard());
     }
     @Test
-    public void testStartsWithTopRowPlayer(){
+    public void shouldStartsWithBottomPlayerInTheFirstMove(){
         Player nextPlayer = game.getNextPlayer();
         Assert.assertEquals("Player bottomRow", nextPlayer.getName());
     }
 
     @Test
-    public void testMoveFrom3rdPitInTheFirstTurnShouldAddOneStoneInThePlayerStore(){
+    public void givenTheMoveFrom3rdPitShouldAddOneStoneOnCurrentPlayerStore(){
         Player player = game.getNextPlayer();
         int pitIndex = 2;
         game.move(player, pitIndex);
         Assert.assertEquals(1, game.getBottomPlayerStore());
+    }
+
+    @Test
+    public void givenAMoveShouldChangeTheNextPlayer(){
+        Player firstPlayer = game.getNextPlayer();
+        int pitIndex = 2;
+        game.move(firstPlayer, pitIndex);
+        Player currentPlayer = game.getNextPlayer();
+        Assert.assertNotEquals(firstPlayer, currentPlayer);
     }
 
     @Test
@@ -51,16 +60,7 @@ public class GameTests {
     }
 
     @Test
-    public void testAfterATurnTheNextPlayerShouldBeDiferentFromPreviousOne(){
-        Player firstPlayer = game.getNextPlayer();
-        int pitIndex = 2;
-        game.move(firstPlayer, pitIndex);
-        Player currentPlayer = game.getNextPlayer();
-        Assert.assertNotEquals(firstPlayer, currentPlayer);
-    }
-
-    @Test
-    public void testAfterTwoMovesFrom3rdPitEachPlayerShouldHaveOneStoneInHisStore(){
+    public void givenTwoMovesFrom3rdPitShouldAddOneStoneForEachPlayerStore(){
         Player player = game.getNextPlayer();
         int pitIndex = 2;
         game.move(player, pitIndex);
@@ -71,7 +71,7 @@ public class GameTests {
     }
 
     @Test
-    public void testAfterTwoMovesFrom3rdPitTopRowShouldBe770777(){
+    public void givenTwoMovesTheTopRowShouldBe770777(){
         Player player = game.getNextPlayer();
         int pitIndex = 2;
         game.move(player, pitIndex);
@@ -82,7 +82,7 @@ public class GameTests {
     }
 
     @Test
-    public void testAfterTwoMovesFrom3rdPitBottomRowShouldBe770777(){
+    public void givenTwoMovesTheBottomRowShouldBe770777(){
         Player player = game.getNextPlayer();
         int pitIndex = 2;
         game.move(player, pitIndex);
@@ -93,12 +93,25 @@ public class GameTests {
     }
 
     @Test
-    public void testAfterAMoveAndTheLastStoneIsDroppedInTheCurrentPlayerStoreThenHeGetsAFreeTurn(){
+    public void givenAMoveWhenTheLastStoneIsDepositedOnCurrentPlayerStoreShouldHimGetAFreeTurn(){
         Player player = game.getNextPlayer();
         int pitIndex = 0;
         game.move(player, pitIndex);
         Player nextPlayer = game.getNextPlayer();
         Assert.assertEquals(player, nextPlayer);
+    }
+
+    @Test
+    public void giveAMoveWhenTheLastStoneIsDroppedInAEmptyPitOnCurrentPlayerSideThenThisStoneAndAllFromOppositePitWillBeTakenAndDepositedOnCurrentPlayerStore(){
+        Player player = game.getNextPlayer();
+        int pitIndex = 2;
+        game.move(player, pitIndex);
+        game.move(game.getNextPlayer(), pitIndex);
+        game.move(game.getNextPlayer(), pitIndex);
+        int[] expectedTopRow = new int[]{7,7,0,7,7,7};
+        int[] expectedBottomRow = new int[]{7,7,0,7,7,7};
+
+
     }
 
 }
