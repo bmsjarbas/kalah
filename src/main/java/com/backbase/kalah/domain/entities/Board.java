@@ -9,10 +9,9 @@ public class Board {
    private Row topRow;
    private Row bottomRow;
 
-    public Board(){
-        topRow = new Row();
-        bottomRow = new Row();
-
+    public Board(Row topRow, Row bottomRow){
+        this.topRow = topRow;
+        this.bottomRow = bottomRow;
     }
     public Row getTopRow() {
         return topRow;
@@ -34,5 +33,16 @@ public class Board {
     }
     public int[] getBottomRowPits() {
         return bottomRow.getPits();
+    }
+
+    public int getSumOfAllStones() {
+        return countAllStones(bottomRow) + countAllStones(topRow);
+    }
+
+    private int countAllStones(Row row){
+        int sum = 0;
+        for(int index = 0; index < row.getNumberOfPits(); index++)
+            sum+=  row.getPitStones(index);
+        return sum + row.getStore();
     }
 }

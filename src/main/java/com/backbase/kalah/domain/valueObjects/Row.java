@@ -6,16 +6,20 @@ import java.util.Arrays;
  * Created by js on 9/19/16.
  */
 public class Row {
+    private final int maxCapacityPerPit;
     private int[] pits;
     private int store;
-    public Row(){
-        pits = new int[6];
+    private int size;
+    public Row(int size, int maxCapacityPerPity){
+        pits = new int[size];
         store = 0;
-        Arrays.fill(pits, 6);
+        Arrays.fill(pits, maxCapacityPerPity);
+        this.size = size;
+        this.maxCapacityPerPit = maxCapacityPerPity;
     }
 
     public int getNumberOfPits(){
-        return pits.length;
+        return this.size;
     }
 
     public int[] getPits() {
@@ -40,5 +44,9 @@ public class Row {
 
     public void incrementAStoneInTheStore() {
         store++;
+    }
+
+    public int getMaxCapacityPerPit() {
+        return maxCapacityPerPit;
     }
 }

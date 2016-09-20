@@ -2,6 +2,7 @@ package com.backbase.kalah.domain.entities;
 
 import com.backbase.kalah.domain.exceptions.InvalidMoveException;
 import com.backbase.kalah.domain.service.Game;
+import com.backbase.kalah.domain.valueObjects.Row;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,10 +15,14 @@ import static org.junit.Assert.assertEquals;
 public class GameTests {
     Game game;
     Board board;
+    Row topRow;
+    Row bottomRow;
 
     @Before
     public void setUp() {
-        board = new Board();
+        topRow = new Row(6, 6);
+        bottomRow = new Row(6,6);
+        board = new Board(bottomRow, topRow);
         game = new Game(board, "Player topRow", "Player bottomRow");
     }
 
@@ -114,6 +119,12 @@ public class GameTests {
         game.move(game.getNextPlayer(), 0);
     }
 
+    @Test
+    public void  giveAMoveWhenTheLastStoneYouDropIsInAnEmptyPitOnCurrentPlayerSideThenCaptureThatAndAllStonesInThePitDirectlyOpposite(){
+        Row bottomRow = new Row(6,6);
+        Row topRow = new Row(6,6);
+        board = new Board(bottomRow, topRow);
 
+    }
 
 }
