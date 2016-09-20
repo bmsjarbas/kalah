@@ -1,5 +1,7 @@
 package com.backbase.kalah.domain.entities;
 
+
+import com.backbase.kalah.domain.exceptions.InvalidMoveException;
 import com.backbase.kalah.domain.valueObjects.Row;
 
 import java.util.HashMap;
@@ -57,9 +59,11 @@ public class Game {
         return board.getBottomRowPits();
     }
 
-    public void move(final Player player, int pitIndex) {
+    public void move(final Player player, int pitIndex) throws InvalidMoveException {
         Row row = mapPlayerRow.get(player);
         int stonesInPit = row.getPitStones(pitIndex);
+        if(stonesInPit == 0)
+            throw new InvalidMoveException();
         row.setStonesInThePit(pitIndex, 0);
 
         for(int currentPitIndex =  pitIndex+1; stonesInPit > 0 && currentPitIndex < row.getNumberOfPits() ; currentPitIndex++){
