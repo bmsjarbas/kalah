@@ -1,29 +1,38 @@
 package com.backbase.kalah.domain.entities;
 
-import java.util.Arrays;
+import com.backbase.kalah.domain.valueObjects.Row;
 
 /**
  * Created by js on 9/19/16.
  */
 public class Board {
-    private int[] topRow;
-    private int[] bottomRow;
-    public int leftStore;
-    public int rightStore;
+   private Row topRow;
+   private Row bottomRow;
 
     public Board(){
-        leftStore = 0;
-        rightStore = 0;
-        topRow = new int[6];
-        bottomRow = new int[6];
-        Arrays.fill(topRow, 6);
-        Arrays.fill(bottomRow, 6);
+        topRow = new Row();
+        bottomRow = new Row();
+
     }
-    public int[] getTopRow() {
+    public Row getTopRow() {
         return topRow;
     }
 
-    public int[] getBottomRow() {
+    public Row getBottomRow() {
         return bottomRow;
+    }
+
+    public int getNumberOfPitsOfTopRow(){
+        return topRow.getNumberOfPits();
+    }
+    public int getNumberOfPitsOfBottomRow(){
+        return bottomRow.getNumberOfPits();
+    }
+
+    public int[] getTopRowPits() {
+        return topRow.getPits();
+    }
+    public int[] getBottomRowPits() {
+        return bottomRow.getPits();
     }
 }

@@ -8,6 +8,7 @@ public class Game {
     private Player bottomRowPlayer;
     private Board board;
 
+
     public Game(String topRowPlayerName, String bottomRowPlayerName) {
         this.topRowPlayer = new Player(topRowPlayerName);
         this.bottomRowPlayer = new Player(bottomRowPlayerName);
