@@ -71,6 +71,13 @@ public class Game{
 
         for(int currentPitIndex =  pitIndex+1; stonesInPit > 0 && currentPitIndex < row.getNumberOfPits() ; currentPitIndex++){
             stonesInPit--;
+
+            if(stonesInPit == 0 && row.getPitStones(currentPitIndex) == 0){
+                Row opponentRow = getOppositePlayerRowEntry(player).getValue();
+                int opponentStones = opponentRow.getPitStones(currentPitIndex);
+                opponentRow.setStonesInThePit(currentPitIndex, 0);
+                row.addStonesInTheStore(opponentStones + 1);
+            }
             row.incrementAStoneInThePit(currentPitIndex);
         }
 
@@ -82,10 +89,7 @@ public class Game{
                 return;
         }
 
-         Map.Entry<Player, Row> opponentPlayer = mapPlayerRow.entrySet()
-                 .stream()
-                 .filter(e -> e.getKey() != player)
-                 .findFirst().get();
+        Map.Entry<Player, Row> opponentPlayer = getOppositePlayerRowEntry(player);
 
         Row oponnentRow = opponentPlayer.getValue();
 
@@ -93,7 +97,15 @@ public class Game{
             stonesInPit--;
             oponnentRow.incrementAStoneInThePit(currentPitIndex);
         }
+
         this.nextPlayer = opponentPlayer.getKey();
+    }
+
+    private Map.Entry<Player, Row> getOppositePlayerRowEntry(Player player) {
+        return mapPlayerRow.entrySet()
+                     .stream()
+                     .filter(e -> e.getKey() != player)
+                     .findFirst().get();
     }
 
     public int getBottomPlayerStore() {

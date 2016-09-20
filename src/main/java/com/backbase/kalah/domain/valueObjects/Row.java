@@ -49,4 +49,8 @@ public class Row {
     public int getMaxCapacityPerPit() {
         return maxCapacityPerPit;
     }
+
+    public void addStonesInTheStore(int quantity) {
+        this.store += quantity;
+    }
 }

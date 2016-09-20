@@ -120,10 +120,16 @@ public class GameTests {
     }
 
     @Test
-    public void  giveAMoveWhenTheLastStoneYouDropIsInAnEmptyPitOnCurrentPlayerSideThenCaptureThatAndAllStonesInThePitDirectlyOpposite(){
-        Row bottomRow = new Row(6,6);
-        Row topRow = new Row(6,6);
-        board = new Board(bottomRow, topRow);
+    public void  giveAMoveWhenTheLastStoneYouDropIsInAnEmptyPitOnCurrentPlayerSideThenCaptureThatAndAllStonesInThePitDirectlyOpposite() throws InvalidMoveException {
+        //0 8 7 7 7 7
+        //1 0 8 8 8 8
+        game.move(game.getNextPlayer(), 0);
+        game.move(game.getNextPlayer(), 1);
+        game.move(game.getNextPlayer(), 0);
+        game.move(game.getNextPlayer(), 0);
+
+        //+9;
+        Assert.assertEquals(11,  game.getBottomPlayerStore());
 
     }
 
