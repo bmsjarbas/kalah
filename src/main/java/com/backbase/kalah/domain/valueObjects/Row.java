@@ -25,4 +25,20 @@ public class Row {
     public int getStore() {
         return store;
     }
+
+    public int getPitStones(int index){
+        return pits[index];
+    }
+
+    public void setStonesInThePit(int index, int stones){
+        pits[index] = stones;
+    }
+
+    public void incrementAStoneInThePit(int index) {
+        pits[index]++;
+    }
+
+    public void incrementAStoneInTheStore() {
+        store++;
+    }
 }

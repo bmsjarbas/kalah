@@ -28,7 +28,27 @@ public class GameTests {
     @Test
     public void testStartsWithTopRowPlayer(){
         Player nextPlayer = game.getNextPlayer();
-        Assert.assertEquals("Player topRow", nextPlayer.getName());
+        Assert.assertEquals("Player bottomRow", nextPlayer.getName());
+    }
+
+    @Test
+    public void testMoveFrom3rdPitInTheFirstTurnShouldAddOneStoneInThePlayerStore(){
+        Player player = game.getNextPlayer();
+        int pitIndex = 2;
+        game.move(player, pitIndex);
+        Assert.assertEquals(1, game.getBottomPlayerStore());
+    }
+
+    @Test
+    public void testMoveFrom3rdPitInTheFirstTurn(){
+        Player player = game.getNextPlayer();
+        int pitIndex = 2;
+        game.move(player, pitIndex);
+        int[] expectedBottomRow = new int[]{6,6,0,7,7,7};
+        int[] expectedTopRow = new int[]{6,6,6,6,7,7};
+        Assert.assertArrayEquals(expectedTopRow, game.getCurrentTopRowPits());
+        Assert.assertArrayEquals(expectedBottomRow, game.getCurrentBottomRowPits());
+
     }
 
 }

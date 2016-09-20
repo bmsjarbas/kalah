@@ -1,0 +1,4 @@
+com/backbase/kalah/domain/entities/Game.class
+com/backbase/kalah/domain/valueObjects/Row.class
+com/backbase/kalah/domain/entities/Player.class
+com/backbase/kalah/domain/entities/Board.class
