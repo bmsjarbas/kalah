@@ -20,16 +20,16 @@ public class BoardTest {
 
     @Test
     public void testHasTwoRowsWithSixPitsEach(){
-        Assert.assertEquals(6, board.getLeftRow().length);
-        Assert.assertEquals(6, board.getRightRow().length);
+        Assert.assertEquals(6, board.getTopRow().length);
+        Assert.assertEquals(6, board.getBottomRow().length);
     }
 
     @Test
     public void testStartsWithSixStonesInEachPit(){
         int[] expectedRow = new int[6];
         Arrays.fill(expectedRow, 6);
-        Assert.assertArrayEquals(expectedRow, board.getLeftRow());
-        Assert.assertArrayEquals(expectedRow, board.getRightRow());
+        Assert.assertArrayEquals(expectedRow, board.getTopRow());
+        Assert.assertArrayEquals(expectedRow, board.getBottomRow());
     }
 
     @Test
