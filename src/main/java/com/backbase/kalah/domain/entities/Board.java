@@ -8,7 +8,12 @@ import java.util.Arrays;
 public class Board {
     private int[] leftRow;
     private int[] rightRow;
+    public int leftStore;
+    public int rightStore;
+
     public Board(){
+        leftStore = 0;
+        rightStore = 0;
         leftRow = new int[6];
         rightRow = new int[6];
         Arrays.fill(leftRow, 6);
