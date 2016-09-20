@@ -44,11 +44,10 @@ public class GameTests {
         Player player = game.getNextPlayer();
         int pitIndex = 2;
         game.move(player, pitIndex);
+        int[] expectedTopRow = new int[]{7,7,6,6,6,6};
         int[] expectedBottomRow = new int[]{6,6,0,7,7,7};
-        int[] expectedTopRow = new int[]{6,6,6,6,7,7};
         Assert.assertArrayEquals(expectedTopRow, game.getCurrentTopRowPits());
         Assert.assertArrayEquals(expectedBottomRow, game.getCurrentBottomRowPits());
-
     }
 
     @Test
@@ -58,6 +57,30 @@ public class GameTests {
         game.move(firstPlayer, pitIndex);
         Player currentPlayer = game.getNextPlayer();
         Assert.assertNotEquals(firstPlayer, currentPlayer);
+    }
+
+    @Test
+    public void testAfterTwoMovesFrom3rdPitEachPlayerShouldHaveOneStoneInHisStore(){
+        Player player = game.getNextPlayer();
+        int pitIndex = 2;
+        game.move(player, pitIndex);
+        Player nextPlayer = game.getNextPlayer();
+        game.move(nextPlayer, pitIndex);
+        Assert.assertEquals(1, game.getBottomPlayerStore());
+        Assert.assertEquals(1, game.getTopPlayerStore());
+    }
+
+    @Test
+    public void testAfterTwoMovesFrom3rdPitTopRowShouldBe770677(){
+        Player player = game.getNextPlayer();
+        int pitIndex = 2;
+        game.move(player, pitIndex);
+        Player nextPlayer = game.getNextPlayer();
+        game.move(nextPlayer, pitIndex);
+        int[] expectedTopRow = new int[]{7,7,0,7,7,7};
+        int[] expectedBottomRow = new int[]{7,7,0,7,7,7};
+        //Assert.assertEquals(1, game.getBottomPlayerStore());
+        Assert.assertArrayEquals(expectedTopRow, game.getCurrentTopRowPits());
     }
 
 }

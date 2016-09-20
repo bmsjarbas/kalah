@@ -79,7 +79,7 @@ public class Game {
 
         Row oponnentRow = opponentPlayer.getValue();
 
-        for(int currentPitIndex = oponnentRow.getNumberOfPits() - 1; stonesInPit > 0 &&  currentPitIndex >= 0; currentPitIndex--){
+        for(int currentPitIndex = 0; stonesInPit > 0 &&  currentPitIndex < oponnentRow.getNumberOfPits(); currentPitIndex++){
             stonesInPit--;
             oponnentRow.incrementAStoneInThePit(currentPitIndex);
         }
@@ -88,5 +88,9 @@ public class Game {
 
     public int getBottomPlayerStore() {
         return mapPlayerRow.get(bottomRowPlayer).getStore();
+    }
+
+    public int getTopPlayerStore() {
+        return mapPlayerRow.get(topRowPlayer).getStore();
     }
 }
