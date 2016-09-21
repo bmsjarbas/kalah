@@ -60,4 +60,8 @@ public class Row {
                 return false;
         return true;
     }
+
+    public boolean isThePitEmpty(int pitIndex) {
+        return pits[pitIndex] == 0;
+    }
 }

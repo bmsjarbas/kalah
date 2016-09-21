@@ -66,15 +66,15 @@ public class Game{
 
     public void move(final Player player, int pitIndex) throws InvalidMoveException {
         Row row = mapPlayerRow.get(player);
-        int stonesInPit = row.getPitStones(pitIndex);
-        if(stonesInPit == 0)
+        int stonesToDistribute = row.getPitStones(pitIndex);
+        if(stonesToDistribute == 0)
             throw new InvalidMoveException();
 
         row.setStonesInThePit(pitIndex, 0);
-        while (stonesInPit > 0){
-            for(int currentPitIndex =  pitIndex+1; stonesInPit > 0 && currentPitIndex < row.getNumberOfPits() ; currentPitIndex++){
-                stonesInPit--;
-                if(stonesInPit == 0 && row.getPitStones(currentPitIndex) == 0){
+        while (stonesToDistribute > 0){
+            for(int currentPitIndex =  pitIndex+1; stonesToDistribute > 0 && currentPitIndex < row.getNumberOfPits() ; currentPitIndex++){
+                stonesToDistribute--;
+                if(stonesToDistribute == 0 && row.isThePitEmpty(currentPitIndex)){
                     Row opponentRow = getOppositePlayerRowEntry(player).getValue();
                     int opponentStones = opponentRow.getPitStones(currentPitIndex);
                     opponentRow.setStonesInThePit(currentPitIndex, 0);
@@ -83,11 +83,11 @@ public class Game{
                 row.incrementAStoneInThePit(currentPitIndex);
             }
 
-            if(stonesInPit > 0){
-                stonesInPit--;
+            if(stonesToDistribute > 0){
+                stonesToDistribute--;
                 row.incrementAStoneInTheStore();
 
-                if(stonesInPit == 0) {
+                if(stonesToDistribute == 0) {
                     if(row.isEmpty())
                         status = Status.FINISHED;
                     return;
@@ -97,8 +97,8 @@ public class Game{
             Map.Entry<Player, Row> opponentPlayer = getOppositePlayerRowEntry(player);
             Row oponnentRow = opponentPlayer.getValue();
 
-            for(int currentPitIndex = 0; stonesInPit > 0 &&  currentPitIndex < oponnentRow.getNumberOfPits(); currentPitIndex++){
-                stonesInPit--;
+            for(int currentPitIndex = 0; stonesToDistribute > 0 &&  currentPitIndex < oponnentRow.getNumberOfPits(); currentPitIndex++){
+                stonesToDistribute--;
                 oponnentRow.incrementAStoneInThePit(currentPitIndex);
             }
 
