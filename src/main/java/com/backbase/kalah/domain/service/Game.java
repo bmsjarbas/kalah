@@ -69,46 +69,47 @@ public class Game{
         int stonesInPit = row.getPitStones(pitIndex);
         if(stonesInPit == 0)
             throw new InvalidMoveException();
+
         row.setStonesInThePit(pitIndex, 0);
-
-        for(int currentPitIndex =  pitIndex+1; stonesInPit > 0 && currentPitIndex < row.getNumberOfPits() ; currentPitIndex++){
-            stonesInPit--;
-
-            if(stonesInPit == 0 && row.getPitStones(currentPitIndex) == 0){
-                Row opponentRow = getOppositePlayerRowEntry(player).getValue();
-                int opponentStones = opponentRow.getPitStones(currentPitIndex);
-                opponentRow.setStonesInThePit(currentPitIndex, 0);
-                row.addStonesInTheStore(opponentStones + 1);
+        while (stonesInPit > 0){
+            for(int currentPitIndex =  pitIndex+1; stonesInPit > 0 && currentPitIndex < row.getNumberOfPits() ; currentPitIndex++){
+                stonesInPit--;
+                if(stonesInPit == 0 && row.getPitStones(currentPitIndex) == 0){
+                    Row opponentRow = getOppositePlayerRowEntry(player).getValue();
+                    int opponentStones = opponentRow.getPitStones(currentPitIndex);
+                    opponentRow.setStonesInThePit(currentPitIndex, 0);
+                    row.addStonesInTheStore(opponentStones + 1);
+                }
+                row.incrementAStoneInThePit(currentPitIndex);
             }
-            row.incrementAStoneInThePit(currentPitIndex);
-        }
 
-        if(stonesInPit > 0){
-            stonesInPit--;
-            row.incrementAStoneInTheStore();
+            if(stonesInPit > 0){
+                stonesInPit--;
+                row.incrementAStoneInTheStore();
 
-            if(stonesInPit == 0) {
-                if(row.isEmpty())
-                    status = Status.FINISHED;
+                if(stonesInPit == 0) {
+                    if(row.isEmpty())
+                        status = Status.FINISHED;
+                    return;
+                }
+            }
+
+            Map.Entry<Player, Row> opponentPlayer = getOppositePlayerRowEntry(player);
+            Row oponnentRow = opponentPlayer.getValue();
+
+            for(int currentPitIndex = 0; stonesInPit > 0 &&  currentPitIndex < oponnentRow.getNumberOfPits(); currentPitIndex++){
+                stonesInPit--;
+                oponnentRow.incrementAStoneInThePit(currentPitIndex);
+            }
+
+            if(oponnentRow.isEmpty() || row.isEmpty()){
+                status = Status.FINISHED;
                 return;
             }
+
         }
 
-        Map.Entry<Player, Row> opponentPlayer = getOppositePlayerRowEntry(player);
-
-        Row oponnentRow = opponentPlayer.getValue();
-
-        for(int currentPitIndex = 0; stonesInPit > 0 &&  currentPitIndex < oponnentRow.getNumberOfPits(); currentPitIndex++){
-            stonesInPit--;
-            oponnentRow.incrementAStoneInThePit(currentPitIndex);
-        }
-
-        if(oponnentRow.isEmpty() || row.isEmpty()){
-            status = Status.FINISHED;
-            return;
-        }
-
-        this.nextPlayer = opponentPlayer.getKey();
+        this.nextPlayer = getOppositePlayerRowEntry(player).getKey();
     }
 
     private Map.Entry<Player, Row> getOppositePlayerRowEntry(Player player) {
