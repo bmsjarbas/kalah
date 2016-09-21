@@ -1,10 +1,14 @@
 package com.backbase.kalah.domain.valueObjects;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 
 /**
  * Created by js on 9/19/16.
  */
+
 public class Row {
     private final int maxCapacityPerPit;
     private int[] pits;

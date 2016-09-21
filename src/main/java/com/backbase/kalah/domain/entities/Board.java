@@ -2,14 +2,17 @@ package com.backbase.kalah.domain.entities;
 
 import com.backbase.kalah.domain.valueObjects.Row;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by js on 9/19/16.
  */
+@Component
 public class Board {
    private Row topRow;
    private Row bottomRow;
 
+    @Autowired
     public Board(Row bottomRow, Row topRow){
         this.topRow = topRow;
         this.bottomRow = bottomRow;
