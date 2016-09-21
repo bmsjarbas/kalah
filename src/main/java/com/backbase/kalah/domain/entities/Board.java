@@ -16,29 +16,24 @@ public class Board {
     public Row getTopRow() {
         return topRow;
     }
-
     public Row getBottomRow() {
         return bottomRow;
     }
-
     public int getNumberOfPitsOfTopRow(){
         return topRow.getNumberOfPits();
     }
     public int getNumberOfPitsOfBottomRow(){
         return bottomRow.getNumberOfPits();
     }
-
     public int[] getTopRowPits() {
         return topRow.getPits();
     }
     public int[] getBottomRowPits() {
         return bottomRow.getPits();
     }
-
     public int getSumOfAllStones() {
         return countAllStones(bottomRow) + countAllStones(topRow);
     }
-
     private int countAllStones(Row row){
         int sum = 0;
         for(int index = 0; index < row.getNumberOfPits(); index++)

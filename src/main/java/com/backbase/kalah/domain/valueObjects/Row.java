@@ -21,46 +21,33 @@ public class Row {
     public int getNumberOfPits(){
         return this.size;
     }
-
     public int[] getPits() {
         return pits;
     }
-
     public int getStore() {
         return store;
     }
-
     public int getPitStones(int index){
         return pits[index];
     }
-
     public void setStonesInThePit(int index, int stones){
         pits[index] = stones;
     }
-
     public void incrementAStoneInThePit(int index) {
         pits[index]++;
     }
-
     public void incrementAStoneInTheStore() {
         store++;
     }
-
-    public int getMaxCapacityPerPit() {
-        return maxCapacityPerPit;
-    }
-
     public void addStonesInTheStore(int quantity) {
         this.store += quantity;
     }
-
     public boolean isEmpty() {
         for(int index = 0; index < pits.length; index++)
             if(pits[index] != 0)
                 return false;
         return true;
     }
-
     public boolean isThePitEmpty(int pitIndex) {
         return pits[pitIndex] == 0;
     }
