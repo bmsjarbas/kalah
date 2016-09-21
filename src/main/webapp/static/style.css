@@ -1,0 +1,33 @@
+div#main {
+    position: absolute;
+    width: 700px;
+    height: 300px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -350px;
+}
+
+table {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 700px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td, th {
+    border: 2px solid #CCC;
+    height: 80px;
+}
+
+th {
+    background: #F3F3F3;
+    font-weight: bold;
+}
+
+td {
+    background: #FAFAFA; /* Lighter grey background */
+    text-align: center; /* Center our text */
+}
+
