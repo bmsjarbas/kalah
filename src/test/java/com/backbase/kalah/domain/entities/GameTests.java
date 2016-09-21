@@ -1,7 +1,7 @@
 package com.backbase.kalah.domain.entities;
 
 import com.backbase.kalah.domain.exceptions.InvalidMoveException;
-import com.backbase.kalah.domain.service.Game;
+import com.backbase.kalah.domain.services.Game;
 import com.backbase.kalah.domain.valueObjects.Row;
 import org.junit.Assert;
 import org.junit.Before;

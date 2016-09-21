@@ -1,4 +1,4 @@
-package com.backbase.kalah.domain.service;
+package com.backbase.kalah.domain.services;
 
 
 import com.backbase.kalah.domain.entities.Board;
