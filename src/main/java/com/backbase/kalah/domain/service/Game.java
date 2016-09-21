@@ -75,10 +75,9 @@ public class Game{
             for(int currentPitIndex =  pitIndex+1; stonesToDistribute > 0 && currentPitIndex < row.getNumberOfPits() ; currentPitIndex++){
                 stonesToDistribute--;
                 if(stonesToDistribute == 0 && row.isThePitEmpty(currentPitIndex)){
-                    Row opponentRow = getOppositePlayerRowEntry(player).getValue();
-                    int opponentStones = opponentRow.getPitStones(currentPitIndex);
-                    opponentRow.setStonesInThePit(currentPitIndex, 0);
-                    row.addStonesInTheStore(opponentStones + 1);
+                    row.incrementAStoneInTheStore();
+                    int opponentStones = getOpponentStones(player, currentPitIndex);
+                    row.addStonesInTheStore(opponentStones);
                 }
                 row.incrementAStoneInThePit(currentPitIndex);
             }
@@ -110,6 +109,13 @@ public class Game{
         }
 
         this.nextPlayer = getOppositePlayerRowEntry(player).getKey();
+    }
+
+    private int getOpponentStones(Player player, int currentPitIndex) {
+        Row opponentRow = getOppositePlayerRowEntry(player).getValue();
+        int opponentStones = opponentRow.getPitStones(currentPitIndex);
+        opponentRow.setStonesInThePit(currentPitIndex, 0);
+        return opponentStones;
     }
 
     private Map.Entry<Player, Row> getOppositePlayerRowEntry(Player player) {
