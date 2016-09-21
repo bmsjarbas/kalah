@@ -1,6 +1,7 @@
 package com.backbase.kalah.domain.entities;
 
 import com.backbase.kalah.domain.valueObjects.Row;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by js on 9/19/16.

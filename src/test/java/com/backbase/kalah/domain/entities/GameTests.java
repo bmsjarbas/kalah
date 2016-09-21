@@ -23,7 +23,8 @@ public class GameTests {
         topRow = new Row(6, 6);
         bottomRow = new Row(6,6);
         board = new Board(bottomRow, topRow);
-        game = new Game(board, "Player topRow", "Player bottomRow");
+
+        game = new Game(board, new Player("Player topRow"), new Player("Player bottomRow"));
     }
 
     @Test
@@ -135,7 +136,7 @@ public class GameTests {
         bottomRow = getRowWithOnlyOnePitFilled();
         topRow = new Row(6, 6);
         board = new Board(bottomRow, topRow);
-        game = new Game(board, "topRow Player", "bottomRow Player");
+        game = new Game(board, new Player("Player topRow"), new Player("Player bottomRow"));
         game.move(game.getNextPlayer(), 5);
         Assert.assertEquals(Game.Status.FINISHED,  game.getStatus());
 

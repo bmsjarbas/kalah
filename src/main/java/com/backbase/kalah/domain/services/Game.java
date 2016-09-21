@@ -5,6 +5,9 @@ import com.backbase.kalah.domain.entities.Board;
 import com.backbase.kalah.domain.entities.Player;
 import com.backbase.kalah.domain.exceptions.InvalidMoveException;
 import com.backbase.kalah.domain.valueObjects.Row;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,16 +15,18 @@ import java.util.Map;
 /**
  * Created by js on 9/19/16.
  */
+@Service
 public class Game{
+
+    private Board board;
     private Player topRowPlayer;
     private Player bottomRowPlayer;
-    private Board board;
     private Map<Player, Row> mapPlayerRow;
     private Player nextPlayer;
     private int status;
 
-    public Game(Board board, String topRowPlayerName, String bottomRowPlayerName) {
-        initializeObjects(board, topRowPlayerName, bottomRowPlayerName);
+    public Game(Board board, Player topRowPlayer, Player bottomRowPlayer) {
+        initializeObjects(board, topRowPlayer, bottomRowPlayer);
         mapPlayerWithRow();
     }
     public Player getTopRowPlayer() {
@@ -97,10 +102,9 @@ public class Game{
     public int getStatus() {
         return this.status;
     }
-    private void initializeObjects(Board board, String topRowPlayerName, String bottomRowPlayerName) {
-
-        this.topRowPlayer = new Player(topRowPlayerName);
-        this.bottomRowPlayer = new Player(bottomRowPlayerName);
+    private void initializeObjects(Board board, Player topRowPlayer, Player bottomRowPlayer) {
+        this.topRowPlayer = topRowPlayer;
+        this.bottomRowPlayer = bottomRowPlayer;
         this.board = board;
         this.mapPlayerRow = new HashMap<Player, Row>(2);
         nextPlayer = bottomRowPlayer;
