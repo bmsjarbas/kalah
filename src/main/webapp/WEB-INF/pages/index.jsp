@@ -14,7 +14,6 @@
     </h2>
     <h3>
         <a href="${gameActionUrl}">Click here to start the game </a>
-
     </h3>
 </div>
 </body>
