@@ -30,7 +30,14 @@ public class GameController {
     @RequestMapping(method = RequestMethod.PUT)
     public String move(int pits) throws InvalidMoveException {
         game.move(game.getNextPlayer(), pits);
+            if(game.isFinished())
+                return "redirect:/end";
         return "redirect:/game";
+    }
+
+    @RequestMapping(path = "/end", method = RequestMethod.GET)
+    public ModelAndView end(){
+        return new ModelAndView("end");
     }
 
 

@@ -128,4 +128,7 @@ public class Game{
                 .findFirst().get();
     }
 
+    public boolean isFinished() {
+        return  this.status == StatusGame.FINISHED;
+    }
 }

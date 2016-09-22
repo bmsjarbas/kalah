@@ -3,6 +3,8 @@ package com.backbase.kalah.web;
 import com.backbase.kalah.domain.services.Game;
 import com.backbase.kalah.infrastructure.AppConfiguration;
 import com.backbase.kalah.web.controllers.GameController;
+import com.backbase.kalah.web.viewModels.GameViewModel;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +16,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.servlet.ModelAndView;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -48,5 +54,22 @@ public class GameControllerTests {
         mockMvc.perform(get("/kalah/game"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("board"));
+    }
+
+    @Test
+    public void givenAPostWithMoveFromIndex0WhenItWasTheFirstMoveThenTheBottomPlayerStoreShouldBe1() throws Exception {
+        mockMvc.perform(put("/kalah/game").param("pits", "0"))
+                .andExpect(status().is3xxRedirection());
+
+        ResultActions perform = mockMvc.perform(get("/kalah/game"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("game"));
+
+        GameViewModel vm = (GameViewModel)perform.andReturn().getModelAndView().getModel().get("game");
+        Assert.assertEquals(1, vm.getBottomPlayerStore());
+
+
+
+
     }
 }
