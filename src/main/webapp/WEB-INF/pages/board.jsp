@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,30 +16,49 @@
     <title>Kalah</title>
 </head>
 <body>
+<spring:url value="/game" var="gameActionUrl" />
 <div class="background">
     <div id="main">
-        <table class="gameBoard">
-            <tr><td colspan="8">Top Player</td></tr>
-            <tr>
-                <td rowspan="2">0</td>
-                <c:forEach var="pit" items="${game.getTopRow()}">
-                    <td>
-                        <c:out value="${pit}"></c:out>
-                    </td>
-                </c:forEach>
-                <td rowspan="2">0</td>
+        <form:form action="${gameActionUrl}" method="put">
+            <table id="gameBoard" class="gameBoard">
+                <tbody>
+                <tr>
+                    <td colspan="8">${game.getTopRowPlayerName()}</td>
+                </tr>
+                <tr id="top-row">
+                    <td rowspan="2">${game.getTopPlayerStore()}</td>
+                    <c:forEach var="pit" items="${game.getTopRow()}" varStatus="loop">
+                        <td>
+                            <input type="radio" name="pits" value="${loop.index}"/><br><br>
+                            <c:out value="${pit}"></c:out>
+                        </td>
+                    </c:forEach>
 
-            </tr>
-            <tr>
-                <c:forEach var="pit" items="${game.getBottomRow()}">
-                    <td>
-                        <c:out value="${pit}"></c:out>
-                    </td>
-                </c:forEach>
-            </tr>
-            <tr><td colspan="8">Bottom Player</td></tr>
-        </table>
+                    <td rowspan="2">${game.getBottomPlayerStore()}</td>
+                </tr>
+                <tr>
+                    <c:forEach var="pit" items="${game.getBottomRow()}" varStatus="loop">
+                        <td>
+                            <input type="radio" name="pits" value="${loop.index}"/><br><br>
+                            <c:out value="${pit}"></c:out>
+                        </td>
+                    </c:forEach>
+                </tr>
+                <tr>
+                    <td colspan="8">${game.getTopRowPlayerName()}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center">
+                <input type="submit" id="move" class="btn" value="Do">
+            </div>
+        </form:form>
+
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"
+        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+
 </body>
 </html>

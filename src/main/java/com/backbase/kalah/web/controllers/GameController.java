@@ -1,5 +1,6 @@
 package com.backbase.kalah.web.controllers;
 
+import com.backbase.kalah.domain.exceptions.InvalidMoveException;
 import com.backbase.kalah.domain.services.Game;
 import com.backbase.kalah.web.viewModels.GameViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class GameController {
     @Autowired
     Game game;
-    @RequestMapping( method = RequestMethod.GET)
-    public ModelAndView start(){
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView index() {
         GameViewModel viewModel = new GameViewModel(game);
         return new ModelAndView("board", "game", viewModel);
     }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public String move(int pits) throws InvalidMoveException {
+        game.move(game.getNextPlayer(), pits);
+        return "redirect:index";
+    }
+
+
 }
