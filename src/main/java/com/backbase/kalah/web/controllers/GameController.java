@@ -4,9 +4,13 @@ import com.backbase.kalah.domain.exceptions.InvalidMoveException;
 import com.backbase.kalah.domain.services.Game;
 import com.backbase.kalah.web.viewModels.GameViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -28,7 +32,7 @@ public class GameController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public String move(int pits) throws InvalidMoveException {
+    public String move(@RequestParam(name = "pits", required = true)  int pits) throws InvalidMoveException {
         game.move(game.getNextPlayer(), pits);
             if(game.isFinished())
                 return "redirect:/end";
@@ -38,6 +42,13 @@ public class GameController {
     @RequestMapping(path = "/end", method = RequestMethod.GET)
     public ModelAndView end(){
         return new ModelAndView("end");
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    @Autowired
+    public String restart(DefaultListableBeanFactory beanFactory){
+        beanFactory.destroySingleton("game");
+        return "redirect:/game";
     }
 
 
