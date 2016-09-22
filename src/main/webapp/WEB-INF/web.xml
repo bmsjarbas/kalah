@@ -25,6 +25,4 @@
         <filter-name>hiddenHttpMethodFilter</filter-name>
         <servlet-name>kalah</servlet-name>
     </filter-mapping>
-
-
 </web-app>

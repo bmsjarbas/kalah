@@ -7,6 +7,7 @@ import com.backbase.kalah.domain.entities.Player;
 import com.backbase.kalah.domain.exceptions.InvalidMoveException;
 import com.backbase.kalah.domain.valueObjects.Row;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ import java.util.Map;
  * Created by js on 9/19/16.
  */
 @Service
-@Scope("singleton")
+@Scope(value="session", proxyMode =ScopedProxyMode.TARGET_CLASS)
 public class Game{
 
     private Board board;
