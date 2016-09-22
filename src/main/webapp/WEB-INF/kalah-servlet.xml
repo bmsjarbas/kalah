@@ -20,6 +20,4 @@
     </bean>
     <mvc:resources mapping="/resources/**" location="/static/" />
     <mvc:annotation-driven />
-
-
 </beans>

@@ -13,6 +13,7 @@ import java.util.UUID;
  */
 @Configuration
 public class AppConfiguration {
+    static int playerCount = 0;
     @Bean
     @Scope("prototype")
     public Row row(){
@@ -22,6 +23,8 @@ public class AppConfiguration {
     @Bean
     @Scope("prototype")
     public Player player(){
-        return new Player(UUID.randomUUID(), "asd");
+        playerCount++;
+        return new Player(UUID.randomUUID(), String.format("Player %d", playerCount));
+
     }
 }

@@ -15,9 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/game")
 public class GameController {
-    @Autowired
-    Game game;
 
+    private Game game;
+    @Autowired( required = true )
+    public GameController(Game game){
+        this.game = game;
+    }
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView index() {
         GameViewModel viewModel = new GameViewModel(game);

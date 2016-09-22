@@ -45,7 +45,7 @@
                     </c:forEach>
                 </tr>
                 <tr>
-                    <td colspan="8">${game.getTopRowPlayerName()}</td>
+                    <td colspan="8">${game.getBottomRowPlayerName()}</td>
                 </tr>
                 </tbody>
             </table>
