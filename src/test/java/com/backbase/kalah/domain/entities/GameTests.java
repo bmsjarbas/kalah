@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.UUID;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -25,7 +27,7 @@ public class GameTests {
         bottomRow = new Row(6,6);
         board = new Board(bottomRow, topRow);
 
-        game = new Game(board, new Player("Player topRow"), new Player("Player bottomRow"));
+        game = new Game(board, new Player(UUID.randomUUID(), "Player topRow"), new Player(UUID.randomUUID(),"Player bottomRow"));
     }
 
     @Test
@@ -137,7 +139,7 @@ public class GameTests {
         bottomRow = getRowWithOnlyOnePitFilled();
         topRow = new Row(6, 6);
         board = new Board(bottomRow, topRow);
-        game = new Game(board, new Player("Player topRow"), new Player("Player bottomRow"));
+        game = new Game(board, new Player(UUID.randomUUID(), "Player topRow"), new Player(UUID.randomUUID(),"Player bottomRow"));
         game.move(game.getNextPlayer(), 5);
         Assert.assertEquals(StatusGame.FINISHED,  game.getStatus());
 

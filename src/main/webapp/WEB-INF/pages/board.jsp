@@ -25,21 +25,21 @@
                 <tr>
                     <td colspan="8">${game.getTopRowPlayerName()}</td>
                 </tr>
-                <tr id="top-row">
+                <tr id="top-row" ${ !game.isTopRowEnabled() ? 'class="row-disabled"' : ''}>
                     <td rowspan="2">${game.getTopPlayerStore()}</td>
                     <c:forEach var="pit" items="${game.getTopRow()}" varStatus="loop">
                         <td>
-                            <input type="radio" name="pits" value="${loop.index}"/><br><br>
+                            <input type="radio" ${ !game.isTopRowEnabled() || pit eq 0 ? 'disabled="disabled"' : ''}name="pits" value="${loop.index}"/><br><br>
                             <c:out value="${pit}"></c:out>
                         </td>
                     </c:forEach>
 
                     <td rowspan="2">${game.getBottomPlayerStore()}</td>
                 </tr>
-                <tr>
+                <tr id="bottom-row" ${ !game.isBottomRowEnabled() ? 'class="row-disabled"' : ''}>
                     <c:forEach var="pit" items="${game.getBottomRow()}" varStatus="loop">
                         <td>
-                            <input type="radio" name="pits" value="${loop.index}"/><br><br>
+                            <input type="radio" ${ !game.isBottomRowEnabled() || pit eq 0 ? 'disabled="disabled"' : ''} name="pits" value="${loop.index}"/><br><br>
                             <c:out value="${pit}"></c:out>
                         </td>
                     </c:forEach>

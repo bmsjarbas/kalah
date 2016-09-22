@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import java.util.UUID;
+
 /**
  * Created by js on 9/21/16.
  */
@@ -20,6 +22,6 @@ public class AppConfiguration {
     @Bean
     @Scope("prototype")
     public Player player(){
-        return new Player("asd");
+        return new Player(UUID.randomUUID(), "asd");
     }
 }

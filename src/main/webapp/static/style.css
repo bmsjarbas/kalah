@@ -58,3 +58,8 @@ td {
     text-decoration: none;
 }
 
+.row-disabled{
+    background-color: #bbb;
+    opacity:0.4;
+}
+
