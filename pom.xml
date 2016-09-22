@@ -79,6 +79,9 @@
                     <webApp>
                         <contextPath>/kalah</contextPath>
                     </webApp>
+                    <httpConnector>
+                        <port>7272</port>
+                    </httpConnector>
                 </configuration>
             </plugin>
         </plugins>
