@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/game")
 public class GameController {
-
+    
     private Game game;
     @Autowired( required = true )
     public GameController(Game game){
@@ -32,7 +32,7 @@ public class GameController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public String move(@RequestParam(name = "pits", required = true)  int pits) throws InvalidMoveException {
+    public String move(@RequestParam(name = "pits")  int pits) throws InvalidMoveException {
         game.move(game.getNextPlayer(), pits);
             if(game.isFinished())
                 return "redirect:/end";
@@ -45,9 +45,7 @@ public class GameController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    @Autowired
-    public String restart(DefaultListableBeanFactory beanFactory){
-        beanFactory.destroySingleton("game");
+    public String restart(){
         return "redirect:/game";
     }
 

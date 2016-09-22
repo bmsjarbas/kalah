@@ -57,6 +57,12 @@
             </div>
         </form:form>
 
+    <form:form action="${gameActionUrl}" method="DELETE">
+        <div style="text-align: center">
+            <input type="submit" id="reset" class="btn" value="Reset">
+        </div>
+    </form:form>
+
     </div>
 </div>
 
