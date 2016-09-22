@@ -156,6 +156,22 @@ public class GameTests {
         Assert.assertEquals(StatusGame.IN_PROGRESS, game.getStatus());
     }
 
+    @Test
+    public void givenANewGameWithOneTurnPlayedThenAfterResetTheValuesShouldBeDefault() throws InvalidMoveException {
+        game.move(game.getNextPlayer(), 0);
+        game.reset();
+        int[] topRow = game.getCurrentTopRowPits();
+        int[] bottomRow = game.getCurrentBottomRowPits();
+        int topStore = game.getTopPlayerStore();
+        int bottomStore = game.getBottomPlayerStore();
+        int[] initialRow = new int[]{6,6,6,6,6,6};
+        Assert.assertArrayEquals(initialRow, topRow);
+        Assert.assertArrayEquals(initialRow, bottomRow);
+        Assert.assertEquals(0, bottomStore);
+        Assert.assertEquals(0, topStore);
+        Assert.assertEquals(game.getBottomRowPlayer(), game.getNextPlayer());
+    }
+
     private Row getRowWithOnlyOnePitFilled(){
         Row row = new Row(6, 6);
         for(int index = 0; index < row.getNumberOfPits() -1; index ++){

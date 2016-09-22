@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/game")
 public class GameController {
-    
+
     private Game game;
     @Autowired( required = true )
     public GameController(Game game){
@@ -46,6 +46,7 @@ public class GameController {
 
     @RequestMapping(method = RequestMethod.DELETE)
     public String restart(){
+        game.reset();
         return "redirect:/game";
     }
 

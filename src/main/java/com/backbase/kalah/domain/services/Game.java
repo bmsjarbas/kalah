@@ -9,6 +9,7 @@ import com.backbase.kalah.domain.valueObjects.Row;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,5 +131,17 @@ public class Game{
 
     public boolean isFinished() {
         return  this.status == StatusGame.FINISHED;
+    }
+
+    public void reset() {
+        nextPlayer = bottomRowPlayer;
+        mapPlayerRow.values().forEach(row -> resetRow(row));
+    }
+
+    private void resetRow(Row row){
+        for(int index = 0; index < row.getNumberOfPits(); index++){
+            row.setStonesInThePit(index, 6);
+        }
+        row.setStoreValue(0);
     }
 }

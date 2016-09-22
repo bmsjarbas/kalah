@@ -55,4 +55,8 @@ public class Row {
     public boolean isThePitEmpty(int pitIndex) {
         return pits[pitIndex] == 0;
     }
+
+    public void setStoreValue(int storeValue) {
+        this.store = storeValue;
+    }
 }
