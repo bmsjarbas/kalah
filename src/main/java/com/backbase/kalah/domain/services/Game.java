@@ -1,12 +1,11 @@
 package com.backbase.kalah.domain.services;
 
 
+import com.backbase.kalah.domain.valueObjects.StatusGame;
 import com.backbase.kalah.domain.entities.Board;
 import com.backbase.kalah.domain.entities.Player;
 import com.backbase.kalah.domain.exceptions.InvalidMoveException;
 import com.backbase.kalah.domain.valueObjects.Row;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +72,7 @@ public class Game{
 
                 if(stonesToDistribute == 0) {
                     if(row.isEmpty())
-                        status = Status.FINISHED;
+                        status = StatusGame.FINISHED;
                     return;
                 }
             }
@@ -87,7 +86,7 @@ public class Game{
             }
 
             if(oponnentRow.isEmpty() || row.isEmpty()){
-                status = Status.FINISHED;
+                status = StatusGame.FINISHED;
                 return;
             }
 
@@ -110,7 +109,7 @@ public class Game{
         this.board = board;
         this.mapPlayerRow = new HashMap<Player, Row>(2);
         nextPlayer = bottomRowPlayer;
-        status = Status.IN_PROGRESS;
+        status = StatusGame.IN_PROGRESS;
     }
     private void mapPlayerWithRow(){
         mapPlayerRow.put(topRowPlayer, board.getTopRow());
@@ -127,11 +126,6 @@ public class Game{
                 .stream()
                 .filter(e -> e.getKey() != player)
                 .findFirst().get();
-    }
-
-    public static class  Status{
-        public static int IN_PROGRESS = 1;
-        public static int FINISHED = 2;
     }
 
 }

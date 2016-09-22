@@ -1,5 +1,6 @@
 package com.backbase.kalah.domain.entities;
 
+import com.backbase.kalah.domain.valueObjects.StatusGame;
 import com.backbase.kalah.domain.exceptions.InvalidMoveException;
 import com.backbase.kalah.domain.services.Game;
 import com.backbase.kalah.domain.valueObjects.Row;
@@ -138,19 +139,19 @@ public class GameTests {
         board = new Board(bottomRow, topRow);
         game = new Game(board, new Player("Player topRow"), new Player("Player bottomRow"));
         game.move(game.getNextPlayer(), 5);
-        Assert.assertEquals(Game.Status.FINISHED,  game.getStatus());
+        Assert.assertEquals(StatusGame.FINISHED,  game.getStatus());
 
     }
 
     @Test
     public void givenANewGameTheStatusShouldBeNotStarted(){
-        Assert.assertEquals(Game.Status.IN_PROGRESS, game.getStatus());
+        Assert.assertEquals(StatusGame.IN_PROGRESS, game.getStatus());
     }
 
     @Test
     public void givenANewGameAndANewMoveTheStatusShouldBeInProgress() throws InvalidMoveException {
         game.move(game.getNextPlayer(), 0);
-        Assert.assertEquals(Game.Status.IN_PROGRESS, game.getStatus());
+        Assert.assertEquals(StatusGame.IN_PROGRESS, game.getStatus());
     }
 
     private Row getRowWithOnlyOnePitFilled(){
