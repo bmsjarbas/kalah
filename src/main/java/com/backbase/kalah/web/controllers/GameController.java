@@ -27,7 +27,7 @@ public class GameController {
     @RequestMapping(method = RequestMethod.PUT)
     public String move(int pits) throws InvalidMoveException {
         game.move(game.getNextPlayer(), pits);
-        return "redirect:index";
+        return "redirect:/game";
     }
 
 
