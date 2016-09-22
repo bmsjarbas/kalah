@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by js on 9/19/16.
  */
-public class GameTests {
+public class GameTest {
     Game game;
     Board board;
     Row topRow;

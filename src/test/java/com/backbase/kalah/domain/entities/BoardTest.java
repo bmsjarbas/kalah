@@ -10,7 +10,7 @@ import java.util.Arrays;
 /**
  * Created by js on 9/19/16.
  */
-public class BoardTests {
+public class BoardTest {
 
     private Board board;
 
