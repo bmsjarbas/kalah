@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -26,11 +27,13 @@
                     <td colspan="8">${game.getTopRowPlayerName()}</td>
                 </tr>
                 <tr id="top-row" ${ !game.isTopRowEnabled() ? 'class="row-disabled"' : ''}>
+                    <c:set var="fieldLength" value="${fn:length(game.getTopRow())}"/>
                     <td rowspan="2">${game.getTopPlayerStore()}</td>
                     <c:forEach var="pit" items="${game.getTopRow()}" varStatus="loop">
+                        <c:set var="index" value="${fieldLength - loop.count}"/>
                         <td>
-                            <input type="radio" ${ !game.isTopRowEnabled() || pit eq 0 ? 'disabled="disabled"' : ''}name="pits" value="${loop.index}"/><br><br>
-                            <c:out value="${pit}"></c:out>
+                            <input type="radio" ${ !game.isTopRowEnabled() || game.getTopRow()[index] eq 0 ? 'disabled="disabled"' : ''}name="pits" value="${index}"/><br><br>
+                            <c:out value="${game.getTopRow()[index]}"></c:out>
                         </td>
                     </c:forEach>
 
